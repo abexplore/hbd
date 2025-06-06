@@ -9,10 +9,10 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       margin: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
       background: linear-gradient(135deg, #d946ef 0%, #fde68a 100%);
@@ -24,10 +24,20 @@
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      position: relative;
       overflow: hidden;
       max-width: 90vw;
       width: 500px;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-in-out;
+      display: none;
+    }
+
+    .container.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .birthday-image-container {
@@ -37,8 +47,6 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      animation: fadeInImage 2s ease-in-out forwards;
-      opacity: 0;
     }
 
     .birthday-image {
@@ -53,34 +61,13 @@
       font-size: 3rem;
       color: #d6336c;
       margin-bottom: 10px;
-      animation: popIn 1s ease-out 0.5s forwards;
-      opacity: 0;
-      transform: scale(0.5);
     }
 
     .wishes-text {
       font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
-      color: #be185d; /* new magenta-pink color */
+      color: #be185d;
       margin-top: 0;
-      animation: fadeInText 1.5s ease-in-out 1s forwards;
-      opacity: 0;
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      70% { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInImage {
-      from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
-      to { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
     .confetti {
@@ -91,6 +78,7 @@
       opacity: 0.7;
       border-radius: 50%;
       animation: fall 5s linear infinite;
+      z-index: -1;
     }
 
     @keyframes fall {
@@ -130,16 +118,16 @@
 </head>
 <body>
 
-  <!-- Click Here Button -->
-  <div class="absolute top-6">
-    <button onclick="document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });"
-      class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-2 px-6 rounded-full shadow-lg animate-bounce transition duration-300 ease-in-out">
-      Click Here
+  <!-- Click to Open Message Button -->
+  <div class="mt-10 text-center">
+    <button id="openBtn"
+      class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out text-lg">
+      Click to Open Your Birthday Message
     </button>
   </div>
 
-  <!-- Main Container -->
-  <div class="container">
+  <!-- Birthday Message Container -->
+  <div class="container" id="birthdayContainer">
     <div class="birthday-image-container">
       <img src="https://raw.githubusercontent.com/abexplore/hbd/main/WhatsApp%20Image%202025-03-31%20at%2022.17.04_5d43d3e5.jpg" 
            alt="Birthday Person" 
@@ -150,9 +138,8 @@
     <p class="wishes-text">Wishing you a day filled with joy and laughter!</p>
   </div>
 
-  <!-- Confetti Animation -->
+  <!-- Confetti -->
   <script>
-    const container = document.querySelector('.container');
     const numConfetti = 100;
     const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
 
@@ -168,6 +155,14 @@
       confetti.style.opacity = Math.random() * 0.5 + 0.5;
       document.body.appendChild(confetti);
     }
+
+    // Show container on button click
+    const openBtn = document.getElementById("openBtn");
+    const container = document.getElementById("birthdayContainer");
+    openBtn.addEventListener("click", () => {
+      container.classList.add("show");
+      openBtn.style.display = "none"; // Hide the button after click
+    });
   </script>
 </body>
 </html>
