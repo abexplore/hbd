@@ -11,28 +11,49 @@
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
       margin: 0;
+      background: linear-gradient(135deg, #f472b6, #fde68a);
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #d946ef 0%, #fde68a 100%);
+    }
+
+    .button-container {
+      margin-top: 15vh;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .click-button {
+      font-size: 1.1rem;
+      padding: 0.9rem 1.8rem;
+      background-color: #db2777;
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    .click-button:hover {
+      background-color: #be185d;
     }
 
     .container {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      max-width: 90vw;
-      width: 100%;
-      margin: 2rem auto;
       display: none;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.8s ease-in-out;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      width: 90vw;
+      max-width: 400px;
+      margin: 2rem auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       position: relative;
-      z-index: 10;
+      z-index: 5;
     }
 
     .container.show {
@@ -42,31 +63,33 @@
     }
 
     .birthday-image-container {
-      width: 180px;
-      height: 240px;
-      margin: 15px auto;
-      border-radius: 15px;
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      margin: 1rem auto;
+      border-radius: 1rem;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
     .birthday-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .happy-birthday-text {
       font-family: 'Dancing Script', cursive;
-      font-size: 2.5rem;
-      color: #d6336c;
-      margin-bottom: 10px;
+      font-size: 2.2rem;
+      color: #db2777;
+      margin: 1rem 0 0.3rem;
     }
 
     .wishes-text {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: #be185d;
+      font-size: 1.1rem;
+      color: #6b21a8;
     }
 
     .confetti {
@@ -103,44 +126,30 @@
       }
     }
 
-    @media (max-width: 600px) {
-      .happy-birthday-text {
-        font-size: 2rem;
+    @media (max-width: 400px) {
+      .click-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
       }
+
+      .happy-birthday-text {
+        font-size: 1.8rem;
+      }
+
       .wishes-text {
         font-size: 1rem;
-      }
-      .birthday-image-container {
-        width: 140px;
-        height: 190px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .happy-birthday-text {
-        font-size: 1.7rem;
-      }
-      .wishes-text {
-        font-size: 0.9rem;
-      }
-      .birthday-image-container {
-        width: 120px;
-        height: 168px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Click to Open Message Button -->
-  <div class="mt-10 text-center z-20">
-    <button id="openBtn"
-      class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out text-lg">
-      Click to Open Your Birthday Message
-    </button>
+  <!-- Click Button -->
+  <div class="button-container">
+    <button id="openBtn" class="click-button">Click to Open Birthday Message 🎉</button>
   </div>
 
-  <!-- Birthday Message Container -->
+  <!-- Birthday Message -->
   <div class="container" id="birthdayContainer">
     <div class="birthday-image-container">
       <img src="https://raw.githubusercontent.com/abexplore/hbd/main/WhatsApp%20Image%202025-03-31%20at%2022.17.04_5d43d3e5.jpg"
@@ -149,7 +158,7 @@
            onerror="this.onerror=null;this.src='https://placehold.co/200x280/E0E0E0/666666?text=Image+Not+Found';">
     </div>
     <h1 class="happy-birthday-text">Happy Birthday Princess!</h1>
-    <p class="wishes-text">Wishing you a day filled with joy and laughter!</p>
+    <p class="wishes-text">Wishing you a day full of joy, love, and sparkles! ✨</p>
   </div>
 
   <script>
@@ -165,7 +174,7 @@
 
     function startConfetti() {
       const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 70; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + 'vw';
@@ -181,7 +190,7 @@
 
     function startBalloons() {
       const balloonColors = ['#f472b6', '#60a5fa', '#34d399', '#facc15', '#fb7185'];
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 20; i++) {
         const balloon = document.createElement('div');
         balloon.classList.add('balloon');
         balloon.style.backgroundColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
