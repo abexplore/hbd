@@ -14,26 +14,23 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
       background: linear-gradient(135deg, #d946ef 0%, #fde68a 100%);
-      padding: 1rem;
     }
 
     .container {
       text-align: center;
-      padding: 16px;
+      padding: 20px;
       background-color: rgba(255, 255, 255, 0.95);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
+      max-width: 90vw;
       width: 100%;
-      max-width: 400px;
-      margin-top: 2rem;
+      margin: 2rem auto;
+      display: none;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.6s ease-in-out;
-      display: none;
+      transition: all 0.8s ease-in-out;
       position: relative;
       z-index: 10;
     }
@@ -45,9 +42,9 @@
     }
 
     .birthday-image-container {
-      width: 140px;
-      height: 196px;
-      margin: 1rem auto;
+      width: 180px;
+      height: 240px;
+      margin: 15px auto;
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -61,26 +58,38 @@
 
     .happy-birthday-text {
       font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #d6336c;
-      margin-bottom: 0.5rem;
+      margin-bottom: 10px;
     }
 
     .wishes-text {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #be185d;
-      margin-top: 0;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0.7;
+      border-radius: 50%;
+      animation: fall 5s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7;}
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0;}
     }
 
     .balloon {
       position: absolute;
-      width: 30px;
-      height: 40px;
       border-radius: 50%;
-      background-color: red;
       animation: floatUp linear infinite;
-      z-index: 0;
+      z-index: 2;
     }
 
     @keyframes floatUp {
@@ -94,15 +103,26 @@
       }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
       .happy-birthday-text {
-        font-size: 1.6rem;
+        font-size: 2rem;
       }
-
       .wishes-text {
         font-size: 1rem;
       }
+      .birthday-image-container {
+        width: 140px;
+        height: 190px;
+      }
+    }
 
+    @media (max-width: 400px) {
+      .happy-birthday-text {
+        font-size: 1.7rem;
+      }
+      .wishes-text {
+        font-size: 0.9rem;
+      }
       .birthday-image-container {
         width: 120px;
         height: 168px;
@@ -112,18 +132,20 @@
 </head>
 <body>
 
-  <!-- Button to Open Message -->
-  <button id="openBtn"
-    class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-3 px-6 rounded-full shadow-lg text-lg mt-8">
-    🎉 Tap to See Birthday Message
-  </button>
+  <!-- Click to Open Message Button -->
+  <div class="mt-10 text-center z-20">
+    <button id="openBtn"
+      class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out text-lg">
+      Click to Open Your Birthday Message
+    </button>
+  </div>
 
   <!-- Birthday Message Container -->
   <div class="container" id="birthdayContainer">
     <div class="birthday-image-container">
-      <img src="https://raw.githubusercontent.com/abexplore/hbd/main/WhatsApp%20Image%202025-03-31%20at%2022.17.04_5d43d3e5.jpg" 
-           alt="Birthday Person" 
-           class="birthday-image" 
+      <img src="https://raw.githubusercontent.com/abexplore/hbd/main/WhatsApp%20Image%202025-03-31%20at%2022.17.04_5d43d3e5.jpg"
+           alt="Birthday Person"
+           class="birthday-image"
            onerror="this.onerror=null;this.src='https://placehold.co/200x280/E0E0E0/666666?text=Image+Not+Found';">
     </div>
     <h1 class="happy-birthday-text">Happy Birthday Princess!</h1>
@@ -134,7 +156,30 @@
     const openBtn = document.getElementById("openBtn");
     const container = document.getElementById("birthdayContainer");
 
-    const createBalloons = () => {
+    openBtn.addEventListener("click", () => {
+      container.classList.add("show");
+      openBtn.style.display = "none";
+      startConfetti();
+      startBalloons();
+    });
+
+    function startConfetti() {
+      const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = -Math.random() * 100 + 'vh';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        confetti.style.width = (Math.random() * 5 + 5) + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.opacity = Math.random() * 0.5 + 0.5;
+        document.body.appendChild(confetti);
+      }
+    }
+
+    function startBalloons() {
       const balloonColors = ['#f472b6', '#60a5fa', '#34d399', '#facc15', '#fb7185'];
       for (let i = 0; i < 25; i++) {
         const balloon = document.createElement('div');
@@ -147,12 +192,6 @@
         document.body.appendChild(balloon);
       }
     }
-
-    openBtn.addEventListener("click", () => {
-      container.classList.add("show");
-      openBtn.style.display = "none";
-      createBalloons();
-    });
   </script>
 </body>
 </html>
