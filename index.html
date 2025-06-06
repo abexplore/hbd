@@ -1,187 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Princess!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Prevent scrollbars from confetti */
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Princess!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #b91c1c 0%, #1e40af 100%);
+    }
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden; /* Keep animations contained */
-            max-width: 90vw;
-            width: 500px;
-        }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      border: 3px solid #eab308;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      max-width: 90vw;
+      width: 500px;
+    }
 
-        .birthday-image-container {
-            width: 200px; /* Adjust as needed */
-            height: 280px; /* Adjust as needed */
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: fadeInImage 2s ease-in-out forwards;
-            opacity: 0;
-        }
+    .birthday-image-container {
+      width: 200px;
+      height: 280px;
+      margin: 20px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeInImage 2s ease-in-out forwards;
+      opacity: 0;
+    }
 
-        .birthday-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+    .birthday-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-        .happy-birthday-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem; /* Responsive font size */
-            color: #d6336c; /* A festive pink/magenta */
-            margin-bottom: 10px;
-            animation: popIn 1s ease-out 0.5s forwards;
-            opacity: 0;
-            transform: scale(0.5);
-        }
+    .happy-birthday-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: #eab308;
+      margin-bottom: 10px;
+      animation: popIn 1s ease-out 0.5s forwards;
+      opacity: 0;
+      transform: scale(0.5);
+      text-shadow: 2px 2px 4px #991b1b;
+    }
 
-        .wishes-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; /* Responsive font size */
-            color: #555;
-            margin-top: 0;
-            animation: fadeInText 1.5s ease-in-out 1s forwards;
-            opacity: 0;
-        }
+    .wishes-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #fef3c7;
+      margin-top: 0;
+      animation: fadeInText 1.5s ease-in-out 1s forwards;
+      opacity: 0;
+    }
 
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            70% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      70% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes fadeInImage {
-            from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
-            to { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
+    @keyframes fadeInImage {
+      from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
 
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f00; /* Placeholder, will be randomized */
-            opacity: 0.7;
-            border-radius: 50%;
-            animation: fall 5s linear infinite;
-        }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0.7;
+      border-radius: 50%;
+      animation: fall 5s linear infinite;
+    }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7;}
-            100% { transform: translateY(110vh) rotate(720deg); opacity: 0;}
-        }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .happy-birthday-text {
-                font-size: 2.2rem; /* Adjusted for longer text */
-            }
-            .wishes-text {
-                font-size: 1.2rem;
-            }
-            .birthday-image-container {
-                width: 150px;
-                height: 210px;
-            }
-            .container {
-                padding: 15px;
-            }
-        }
-         @media (max-width: 400px) {
-            .happy-birthday-text {
-                font-size: 1.8rem; /* Adjusted for longer text */
-            }
-            .wishes-text {
-                font-size: 1rem;
-            }
-             .birthday-image-container {
-                width: 120px;
-                height: 168px;
-            }
-        }
-    </style>
+    @media (max-width: 600px) {
+      .happy-birthday-text { font-size: 2.2rem; }
+      .wishes-text { font-size: 1.2rem; }
+      .birthday-image-container { width: 150px; height: 210px; }
+      .container { padding: 15px; }
+    }
+
+    @media (max-width: 400px) {
+      .happy-birthday-text { font-size: 1.8rem; }
+      .wishes-text { font-size: 1rem; }
+      .birthday-image-container { width: 120px; height: 168px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="birthday-image-container">
-            <!--
-                IMPORTANT: Replace the src attribute below with the actual URL of the birthday person's image.
-                For example: src="https://your-image-url.com/image.jpg"
-                Or, if you have uploaded the image and have a local path/ID, you might need to adjust how it's linked.
-                For now, a placeholder is used.
-            -->
-            <img src="https://placehold.co/200x280/FFC0CB/FFFFFF?text=Birthday+Person" alt="Birthday Person" class="birthday-image" id="birthdayPersonImage"
-            onerror="this.onerror=null;this.src='https://placehold.co/200x280/E0E0E0/666666?text=Image+Not+Found';">
-        </div>
-        <h1 class="happy-birthday-text">Happy Birthday Princess!</h1>
-        <p class="wishes-text">Wishing you a day filled with joy and laughter!</p>
-        </div>
+  <div class="container">
+    <div class="birthday-image-container">
+      <img src="https://raw.githubusercontent.com/abexplore/hbd/main/WhatsApp%20Image%202025-03-31%20at%2022.17.04_5d43d3e5.jpg"
+           alt="Birthday Person" class="birthday-image" id="birthdayPersonImage"
+           onerror="this.onerror=null;this.src='https://placehold.co/200x280/E0E0E0/666666?text=Image+Not+Found';">
+    </div>
+    <h1 class="happy-birthday-text">Happy Birthday Princess!</h1>
+    <p class="wishes-text">Wishing you a day filled with joy and laughter!</p>
+  </div>
 
-    <script>
-        const container = document.querySelector('.container');
-        const numConfetti = 100;
-        const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
+  <script>
+    const container = document.querySelector('.container');
+    const numConfetti = 100;
+    const colors = ['#b91c1c', '#1e40af', '#eab308', '#f9a8d4', '#fef3c7'];
 
-        for (let i = 0; i < numConfetti; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = Math.random() * 100 + 'vw'; // Spread across viewport width
-            confetti.style.top = -Math.random() * 100 + 'vh'; // Start above the screen
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDelay = Math.random() * 5 + 's'; // Stagger start times
-            confetti.style.width = (Math.random() * 5 + 5) + 'px'; // Random size
-            confetti.style.height = confetti.style.width;
-            confetti.style.opacity = Math.random() * 0.5 + 0.5; // Random opacity
-            document.body.appendChild(confetti); // Append to body for full screen effect
-        }
-
-        // Optional: If you want to allow the user to upload an image and display it
-        // You would need an <input type="file"> element in your HTML.
-        // Example: <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-        // <button onclick="document.getElementById('imageUpload').click()">Upload Image</button>
-
-        // const imageUpload = document.getElementById('imageUpload');
-        // const birthdayImage = document.getElementById('birthdayPersonImage');
-
-        // if (imageUpload && birthdayImage) {
-        //     imageUpload.addEventListener('change', function(event) {
-        //         const file = event.target.files[0];
-        //         if (file) {
-        //             const reader = new FileReader();
-        //             reader.onload = function(e) {
-        //                 birthdayImage.src = e.target.result;
-        //             }
-        //             reader.readAsDataURL(file);
-        //         }
-        //     });
-        // }
-    </script>
+    for (let i = 0; i < numConfetti; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = -Math.random() * 100 + 'vh';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = Math.random() * 5 + 's';
+      confetti.style.width = (Math.random() * 5 + 5) + 'px';
+      confetti.style.height = confetti.style.width;
+      confetti.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000); // Clean-up
+    }
+  </script>
 </body>
 </html>
