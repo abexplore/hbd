@@ -32,6 +32,8 @@
       transform: translateY(20px);
       transition: all 0.8s ease-in-out;
       display: none;
+      position: relative;
+      z-index: 10;
     }
 
     .container.show {
@@ -70,20 +72,42 @@
       margin-top: 0;
     }
 
-    .confetti {
+    .confetti, .balloon {
       position: absolute;
+      z-index: 1;
+    }
+
+    .confetti {
       width: 10px;
       height: 10px;
       background-color: #f00;
       opacity: 0.7;
       border-radius: 50%;
       animation: fall 5s linear infinite;
-      z-index: -1;
     }
 
     @keyframes fall {
       0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.7;}
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0;}
+    }
+
+    .balloon {
+      width: 30px;
+      height: 40px;
+      border-radius: 50% 50% 50% 50%;
+      background-color: red;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 600px) {
@@ -119,7 +143,7 @@
 <body>
 
   <!-- Click to Open Message Button -->
-  <div class="mt-10 text-center">
+  <div class="mt-10 text-center z-20">
     <button id="openBtn"
       class="bg-[#be185d] hover:bg-[#9d174d] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out text-lg">
       Click to Open Your Birthday Message
@@ -138,17 +162,17 @@
     <p class="wishes-text">Wishing you a day filled with joy and laughter!</p>
   </div>
 
-  <!-- Confetti -->
+  <!-- JavaScript for Confetti + Balloon Effects -->
   <script>
+    // Confetti
     const numConfetti = 100;
-    const colors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
-
+    const confettiColors = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffd700', '#ff8c00', '#adff2f'];
     for (let i = 0; i < numConfetti; i++) {
       const confetti = document.createElement('div');
       confetti.classList.add('confetti');
       confetti.style.left = Math.random() * 100 + 'vw';
       confetti.style.top = -Math.random() * 100 + 'vh';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
       confetti.style.animationDelay = Math.random() * 5 + 's';
       confetti.style.width = (Math.random() * 5 + 5) + 'px';
       confetti.style.height = confetti.style.width;
@@ -156,12 +180,27 @@
       document.body.appendChild(confetti);
     }
 
-    // Show container on button click
+    // Balloons
+    const balloonColors = ['#f472b6', '#60a5fa', '#34d399', '#facc15', '#fb7185'];
+    for (let i = 0; i < 25; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.backgroundColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      balloon.style.width = (Math.random() * 20 + 30) + 'px';
+      balloon.style.height = (Math.random() * 30 + 40) + 'px';
+      balloon.style.borderRadius = '50% 50% 50% 50%';
+      balloon.style.opacity = 0.8;
+      document.body.appendChild(balloon);
+    }
+
+    // Show message on button click
     const openBtn = document.getElementById("openBtn");
     const container = document.getElementById("birthdayContainer");
     openBtn.addEventListener("click", () => {
       container.classList.add("show");
-      openBtn.style.display = "none"; // Hide the button after click
+      openBtn.style.display = "none";
     });
   </script>
 </body>
